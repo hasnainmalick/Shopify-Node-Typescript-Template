@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model session {
+  sessionId     Int       @id @default(autoincrement())
+  id            String    @unique(map: "session_session_id_unique")
+  shop          String
+  isOnline      Boolean
+  state         String
+  createdAt     DateTime? @db.Timestamp(0)
+  updatedAt     DateTime? @db.Timestamp(0)
+  scope         String?   @db.VarChar(250)
+  accessToken   String?
+  expires       DateTime? @db.DateTime(0)
+  userId        BigInt?
+  firstName     String?
+  lastName      String?
+  email         String?
+  plan          String?
+  accountOwner  Boolean   @default(false)
+  locale        String?
+  collaborator  Boolean?  @default(false)
+  emailVerified Boolean?  @default(false)
+}
